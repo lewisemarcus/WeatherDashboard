@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="jumbotron text-center p-0">
+        <h1 class="display-3">Weather Dashboard</h1>
+    </header>
+    <div class="container-fluid justify-content-start m-0">
+        <div class="row m-0">
+            <div class="col flex-1" style= "max-width: 25%">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter a city..." aria-label="Enter a city..." aria-describedby="button-addon2">
+                    <button class="btn searchBtn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+                </div>
+            </div>
+            <div class="col flex-1" style= "max-width: 72%">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="Grab Image of City">
+                    <div class="card-body">
+                        <h1 class="card-title">City and Date</h1>
+                        <h5 class="card-text">Get City headline</h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Temp:</li>
+                        <li class="list-group-item">Wind:</li>
+                        <li class="list-group-item">Humidity:</li>
+                        <li class="list-group-item">UV Index:</li>
+                    </ul>
+                </div>
+                <div class = "row m-0 mt-5 justify-content-between">
+                    <div id="1" class="card" style="max-width: 15rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Day 1 of 5</h5>
+                          <p class="card-text">Icon of weather of that day</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Temp:</li>
+                          <li class="list-group-item">Wind:</li>
+                          <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div id="2" class="card" style="max-width: 15rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Day 2 of 5</h5>
+                          <p class="card-text">Icon of weather of that day</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Temp:</li>
+                          <li class="list-group-item">Wind:</li>
+                          <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div id="3" class="card" style="max-width: 15rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Day 3 of 5</h5>
+                          <p class="card-text">Icon of weather of that day</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Temp:</li>
+                          <li class="list-group-item">Wind:</li>
+                          <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div id="4" class="card" style="max-width: 15rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Day 4 of 5</h5>
+                          <p class="card-text">Icon of weather of that day</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Temp:</li>
+                          <li class="list-group-item">Wind:</li>
+                          <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                    <div id="5" class="card" style="max-width: 15rem;">
+                        <div class="card-body">
+                          <h5 class="card-title">Day 5 of 5</h5>
+                          <p class="card-text">Icon of weather of that day</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Temp:</li>
+                          <li class="list-group-item">Wind:</li>
+                          <li class="list-group-item">Humidity:</li>
+                        </ul>
+                    </div>
+                </div>   
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+</body>
