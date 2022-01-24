@@ -42,19 +42,18 @@ function searchWeather() {
                         newSearchBtn.textContent = recentSearch
                         newSearchBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
                         newSearchBtn.setAttribute("id", "new-search")
-                        searchCol.append(newSearchBtn)
-                        
+                        searchCol.append(newSearchBtn)                      
                         //Removal of repeat entries, create an empty list to append true values for each new button.
                         const seenIDs = [];
                         for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {
                             button = document.getElementsByClassName('newBtn')[each]
-                            localStorage.setItem("new-button "+each, JSON.stringify(button))
+                            localStorage.setItem("new-button "+each, button.textContent)
                             //Checks to see if the textContent exists per button, and removes the old search.
                             if (seenIDs[button.textContent]) {
                                 button.remove()
                             }
+                            //If the textContent is originial, set value of corresponding index in SeenIDs to 'true'
                             else {
-                                //TODO: Create a localstorage item for the new button appended.
                                 searchCol.append(newSearchBtn)
                                 seenIDs[button.textContent] = true
                             }
@@ -125,6 +124,9 @@ searchBtn.addEventListener("click", searchWeather)
 
 window.onload = function () {
     for (let each = 0; each < localStorage.getItem('buttons'); each++) {
-        localStorage.getItem('new-button'+each)
+        //TODO: Append each saved button to searchCol
+        //TODO: add event listeners to saved buttons on page load
+        //TODO: adjust dates of small cards
+        
     }
 }
