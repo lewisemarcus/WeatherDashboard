@@ -9,3 +9,14 @@ img {
     object-fit: cover;
     height: 150px;
 }
+
+.error {
+    font-size:larger;
+}
+
+.newBtn {
+    width: 100%;
+    background-color: #777777;
+    color: white;
+    margin-top: 10px;
+}

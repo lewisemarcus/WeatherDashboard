@@ -21,25 +21,24 @@
         <div class="row m-0">
             <div id="searchCol" class="col flex-1" style= "max-width: 25%;">
                 <div class="input-group mb-3">
-                    <input autocomplete="off" type="text" class="form-control" placeholder="Enter a location in the US(San Diego, CA)..." aria-label="Enter a location in the US(San Diego, CA)..." aria-describedby="button-addon2">
+                    <input autocomplete="off" type="text" class="form-control" placeholder="Enter a city..." aria-label="Enter a city..." aria-describedby="button-addon2">
                     <button class="btn searchBtn btn-outline-secondary" type="button" id="button-addon2">Search</button>
                 </div>
             </div>
             <div class="col flex-1" style= "max-width: 72%;">
                 <div class="card">
-                    <img src="..." class="card-img-top" alt="Image relating to weather">
                     <div class="card-body">
-                        <h1 class="card-title">City and Date</h1>
-                        <h5 class="card-text">Get City headline</h5>
+                        <h1 id="city" class="card-title">City and weather icon</h1>
+                        <h5 id="city-date" class="card-text">Get City Date</h5>
                     </div>
-                    <ul class="list-group list-group-flush">
+                    <ul id = "large-weather" class="list-group list-group-flush">
                         <li class="list-group-item">Temp:</li>
                         <li class="list-group-item">Wind:</li>
                         <li class="list-group-item">Humidity:</li>
                         <li class="list-group-item">UV Index:</li>
                     </ul>
                 </div>
-                <div class = "row m-0 mt-5 justify-content-between">
+                <div id="cards" class = "row m-0 mt-5 justify-content-between">
                     <div id="1" class="card" style="max-width: 15rem;">
                         <div class="card-body">
                           <h5 class="card-title">Day 1 of 5</h5>
@@ -100,5 +99,6 @@
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://momentjs.com/downloads/moment-timezone-with-data-1970-2030.js"></script>
     <script src="script.js"></script>
 </body>
