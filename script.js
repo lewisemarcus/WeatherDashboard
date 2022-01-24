@@ -6,6 +6,7 @@ const largeCard = document.querySelector('#large-weather')
 const cards = document.querySelector('#cards')
 const searchCol = document.getElementById('searchCol')
 const error = document.createElement('p')
+
 error.classList.add("error")
 
 const api = 'd02fa9172dbf15e41731eb3c85cf0882'
@@ -79,11 +80,29 @@ function searchWeather() {
                                 else {
                                     document.querySelector('#card-headline').textContent = ""    
                                 }
+                                const uviEl = document.createElement('span')
+                                uviEl.innerHTML = data.current.uvi
+                                if (data.current.uvi < 3) {
+                                    uviEl.setAttribute('style', 'background-color: lime')
+                                }
+                                else if (data.current.uvi > 2 && data.current.uvi < 6) {
+                                    uviEl.setAttribute('style', 'background-color: yellow')
+                                }
+                                else if (data.current.uvi > 5 && data.current.uvi < 8) {
+                                    uviEl.setAttribute('style', 'background-color: orange')
+                                }
+                                else if (data.current.uvi > 7 && data.current.uvi < 11) {
+                                    uviEl.setAttribute('style', 'background-color: red')
+                                }
+                                else if (data.current.uvi > 10) {
+                                    uviEl.setAttribute('style', 'background-color: slateblue')
+                                }
+                                uviEl.style.borderRadius = '5px'
                                 //Appending current day weather information to large card.                              
                                 largeCard.children[0].textContent = "Temp: " + data.current.temp + " °F"
                                 largeCard.children[1].textContent = "Wind Speed: " + data.current.wind_speed + " mph"
                                 largeCard.children[2].textContent = "Humidity Level: " + data.current.humidity + "%"
-                                largeCard.children[3].textContent = "UV Index: " + data.current.uvi
+                                largeCard.children[3].append(uviEl)    
                                 //Forecast loop which appends weather details to weather cards.
                                 for (let each = 0; each < cards.children.length; each++) {
                                     const forecastUrl = 'https://openweathermap.org/img/wn/' + data.daily[each + 1].weather[0].icon + '.png'
@@ -96,7 +115,6 @@ function searchWeather() {
                         //Sets icon for large card.
                         iconURL = 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'
                         cityEl.innerHTML = data.name + ' <img src =' + iconURL + ' alt = "Image of weather icon">'
-
                     })
                 }
             })
