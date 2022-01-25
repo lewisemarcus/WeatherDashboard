@@ -5,11 +5,15 @@ const cityEl = document.querySelector('#city')
 const largeCard = document.querySelector('#large-weather')
 const cards = document.querySelector('#cards')
 const searchCol = document.getElementById('searchCol')
+const uviEl = document.createElement('span')
+const seenLats = []
 const error = document.createElement('p')
-
 error.classList.add("error")
 
 const api = 'd02fa9172dbf15e41731eb3c85cf0882'
+
+document.querySelector('#weather').style.visibility = 'hidden'
+
 
 function searchWeather() {
     //Removes error message if already present on page.
@@ -19,6 +23,7 @@ function searchWeather() {
     if (userInput.value == "") {
         error.textContent = "Please enter a city..."
         searchCol.prepend(error)
+        document.querySelector('#weather').style.visibility = 'hidden'
     }
     else {
         const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput.value + ',us&units=imperial&appid=' + api
@@ -30,91 +35,96 @@ function searchWeather() {
                     console.log("INVALID ENTRY")
                     error.textContent = "INVALID ENTRY! Please enter a city..."
                     searchCol.prepend(error)
+                    document.querySelector('#weather').style.visibility = 'hidden'
                 }
                 else {
+                    document.querySelector('#weather').style.visibility = 'visible'
                     return response.json()
-                    .then(function (data) {
-                        const lat = data.coord.lat
-                        const lon = data.coord.lon
-                        const oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + api
-                        const recentSearch = data.name
-                        const newSearchBtn = document.createElement('button')
-                        newSearchBtn.textContent = recentSearch
-                        newSearchBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
-                        newSearchBtn.setAttribute("id", "new-search")
-                        searchCol.append(newSearchBtn)                      
-                        //Removal of repeat entries, create an empty list to append true values for each new button.
-                        const seenIDs = [];
-                        for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {
-                            button = document.getElementsByClassName('newBtn')[each]
-                            localStorage.setItem("new-button "+each, button.textContent)
-                            //Checks to see if the textContent exists per button, and removes the old search.
-                            if (seenIDs[button.textContent]) {
-                                button.remove()
-                            }
-                            //If the textContent is originial, set value of corresponding index in SeenIDs to 'true'
-                            else {
-                                searchCol.append(newSearchBtn)
-                                seenIDs[button.textContent] = true
-                            }
-                        }
-                        localStorage.setItem("buttons", document.getElementsByClassName('newBtn').length)
-                        //Recursive call of searchWeather if old searches are clicked.
-                        newSearchBtn.addEventListener("click", function () {
-                            userInput.value = recentSearch
-                            searchWeather()
-                        })
-                        userInput.value = ""
-                        //Fetch request to get UV Index and humidity from One Call API.
-                        fetch(oneCallUrl)
-                            .then(function (response) {
-                                return response.json()
-                            })
-                            .then(function (data) {
-                                document.querySelector('#city-date').textContent = moment().tz(data.timezone).format('L')
-                                //Checks if there are news headlines in 'data', displays if existing
-                                if (data.alerts != undefined) {
-                                    document.querySelector('#card-headline').textContent = data.alerts[0].description.substring(3, 150) + '...'
+                        .then(function (data) {
+                            const lat = data.coord.lat
+                            const lon = data.coord.lon
+                            const oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + api
+                            const recentSearch = data.name
+                            const newSearchBtn = document.createElement('button')
+                            newSearchBtn.textContent = recentSearch
+                            newSearchBtn.value = userInput.value.toUpperCase()
+                            newSearchBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
+                            newSearchBtn.setAttribute("id", "new-search")
+                            searchCol.append(newSearchBtn)
+                            //Removal of repeat entries, create an empty list to append true values for each new button.
+                            const seenIDs = []
+                            for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {
+                                button = document.getElementsByClassName('newBtn')[each]
+                                localStorage.setItem('new-button ' + each, button.textContent)
+                                localStorage.setItem('button-value ' + each, button.value)
+                                //Checks to see if the textContent and latitude exists per button, and removes the old search.
+                                if (seenIDs[button.value] == true && seenLats[lat.toString()] == true) { 
+                                    button.remove()
                                 }
+                                //If the textContent/latitude are originial, set value of corresponding index in SeenIDs/seenLats to 'true'
                                 else {
-                                    document.querySelector('#card-headline').textContent = ""    
+                                    searchCol.append(newSearchBtn)
+                                    seenLats[lat.toString()] = true
+                                    seenIDs[button.value] = true
                                 }
-                                const uviEl = document.createElement('span')
-                                uviEl.innerHTML = data.current.uvi
-                                if (data.current.uvi < 3) {
-                                    uviEl.setAttribute('style', 'background-color: lime')
-                                }
-                                else if (data.current.uvi > 2 && data.current.uvi < 6) {
-                                    uviEl.setAttribute('style', 'background-color: yellow')
-                                }
-                                else if (data.current.uvi > 5 && data.current.uvi < 8) {
-                                    uviEl.setAttribute('style', 'background-color: orange')
-                                }
-                                else if (data.current.uvi > 7 && data.current.uvi < 11) {
-                                    uviEl.setAttribute('style', 'background-color: red')
-                                }
-                                else if (data.current.uvi > 10) {
-                                    uviEl.setAttribute('style', 'background-color: slateblue')
-                                }
-                                uviEl.style.borderRadius = '5px'
-                                //Appending current day weather information to large card.                              
-                                largeCard.children[0].textContent = "Temp: " + data.current.temp + " °F"
-                                largeCard.children[1].textContent = "Wind Speed: " + data.current.wind_speed + " mph"
-                                largeCard.children[2].textContent = "Humidity Level: " + data.current.humidity + "%"
-                                largeCard.children[3].append(uviEl)    
-                                //Forecast loop which appends weather details to weather cards.
-                                for (let each = 0; each < cards.children.length; each++) {
-                                    const forecastUrl = 'https://openweathermap.org/img/wn/' + data.daily[each + 1].weather[0].icon + '.png'
-                                    cards.children[each].children[0].children[1].innerHTML = ' <img src =' + forecastUrl + ' alt = "Image of day\'s weather icon">'
-                                    cards.children[each].children[1].children[0].textContent = "Temp: " + data.daily[each + 1].temp.max + " °F"
-                                    cards.children[each].children[1].children[1].textContent = "Wind Speed: " + data.daily[each + 1].wind_speed + " mph"
-                                    cards.children[each].children[1].children[2].textContent = "Humidity Level: " + data.daily[each + 1].humidity + "%"
-                                }
+                            }
+                            localStorage.setItem("buttons", document.getElementsByClassName('newBtn').length)
+                            //Recursive call of searchWeather if old searches are clicked.
+                            newSearchBtn.addEventListener("click", function () {
+                                userInput.value = newSearchBtn.value
+                                searchWeather()
                             })
-                        //Sets icon for large card.
-                        iconURL = 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'
-                        cityEl.innerHTML = data.name + ' <img src =' + iconURL + ' alt = "Image of weather icon">'
-                    })
+                            userInput.value = ""
+                            //Fetch request to get UV Index and humidity from One Call API.
+                            fetch(oneCallUrl)
+                                .then(function (response) {
+                                    return response.json()
+                                })
+                                .then(function (data) {
+                                    document.querySelector('#city-date').textContent = moment().tz(data.timezone).format('L')
+                                    //Checks if there are news headlines in 'data', displays if existing
+                                    if (data.alerts != undefined) {
+                                        document.querySelector('#card-headline').textContent = data.alerts[0].description.substring(3, 150) + '...'
+                                    }
+                                    else {
+                                        document.querySelector('#card-headline').textContent = ""
+                                    }
+                                    uviEl.innerHTML = data.current.uvi
+                                    if (data.current.uvi < 3) {
+                                        uviEl.setAttribute('style', 'background-color: lime')
+                                    }
+                                    else if (data.current.uvi > 2 && data.current.uvi < 6) {
+                                        uviEl.setAttribute('style', 'background-color: yellow')
+                                    }
+                                    else if (data.current.uvi > 5 && data.current.uvi < 8) {
+                                        uviEl.setAttribute('style', 'background-color: orange')
+                                    }
+                                    else if (data.current.uvi > 7 && data.current.uvi < 11) {
+                                        uviEl.setAttribute('style', 'background-color: red')
+                                    }
+                                    else if (data.current.uvi > 10) {
+                                        uviEl.setAttribute('style', 'background-color: slateblue')
+                                    }
+                                    uviEl.style.borderRadius = '5px'
+                                    //Appending current day weather information to large card.                              
+                                    largeCard.children[0].textContent = "Temp: " + data.current.temp + " °F"
+                                    largeCard.children[1].textContent = "Wind Speed: " + data.current.wind_speed + " mph"
+                                    largeCard.children[2].textContent = "Humidity Level: " + data.current.humidity + "%"
+                                    largeCard.children[3].append(uviEl)
+                                    //Forecast loop which appends weather details to weather cards.
+                                    for (let each = 0; each < cards.children.length; each++) {
+                                        const forecastUrl = 'https://openweathermap.org/img/wn/' + data.daily[each + 1].weather[0].icon + '.png'
+                                        cards.children[each].children[0].children[0].textContent = moment().add(each + 1, 'day').tz(data.timezone).format('L')
+                                        cards.children[each].children[0].children[1].innerHTML = ' <img src =' + forecastUrl + ' alt = "Image of day\'s weather icon">'
+                                        cards.children[each].children[1].children[0].textContent = "Temp: " + data.daily[each + 1].temp.max + " °F"
+                                        cards.children[each].children[1].children[1].textContent = "Wind Speed: " + data.daily[each + 1].wind_speed + " mph"
+                                        cards.children[each].children[1].children[2].textContent = "Humidity Level: " + data.daily[each + 1].humidity + "%"
+                                    }
+                                })
+                            //Sets icon for large card.
+                            iconURL = 'https://openweathermap.org/img/wn/' + data.weather[0].icon + '@2x.png'
+                            cityEl.innerHTML = data.name + ' <img src =' + iconURL + ' alt = "Image of weather icon">'
+                        })
                 }
             })
     }
@@ -124,9 +134,14 @@ searchBtn.addEventListener("click", searchWeather)
 
 window.onload = function () {
     for (let each = 0; each < localStorage.getItem('buttons'); each++) {
-        //TODO: Append each saved button to searchCol
-        //TODO: add event listeners to saved buttons on page load
-        //TODO: adjust dates of small cards
-        
+        const newBtn = document.createElement('button')
+        newBtn.textContent = localStorage.getItem('new-button ' + each)
+        newBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
+        newBtn.setAttribute("id", "new-search")
+        newBtn.addEventListener("click", function() {
+            userInput.value = localStorage.getItem('button-value ' + each)
+        })
+        newBtn.addEventListener("click", searchWeather)
+        searchCol.append(newBtn)
     }
 }
