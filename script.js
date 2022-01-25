@@ -156,7 +156,6 @@ function mediaQuery(query) {
         document.getElementById('weather').style.maxWidth = '90%'
         document.getElementById('container').classList.replace("justify-content-start", "justify-content-center")
         document.getElementById('cards').classList.replace("justify-content-between", "justify-content-center")
-        console.log('match')
     }
     else {
         document.getElementById('weather').style.marginTop = '0'
