@@ -145,3 +145,28 @@ window.onload = function () {
         searchCol.append(newBtn)
     }
 }
+
+function mediaQuery(query) {
+    if (query.matches) {
+    document.getElementById('weather').style.marginTop = '15px'
+    document.getElementById('main-div').classList.replace("row","flex-column")
+    document.getElementById('main-div').classList.add("d-flex")
+    document.getElementById('main-div').style.alignItems = 'center'
+    document.getElementById('weather').style.maxWidth = '90%'
+    document.getElementById('container').classList.replace("justify-content-start","justify-content-center")
+    document.getElementById('cards').classList.replace("justify-content-between","justify-content-center")
+    console.log('match')
+    }
+    else {
+        document.getElementById('weather').style.marginTop = '0'
+        document.getElementById('weather').style.maxWidth = '72%'
+        document.getElementById('cards').classList.replace("justify-content-center", "justify-content-between")
+        document.getElementById('main-div').style.alignItems = ''
+        document.getElementById('main-div').classList.replace("flex-column","row")
+        document.getElementById('container').classList.replace("justify-content-center", "justify-content-start")
+    }
+}
+
+const windowSize = window.matchMedia("(max-width: 576px)")
+mediaQuery(windowSize)
+windowSize.addListener(mediaQuery)
