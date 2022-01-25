@@ -1,4 +1,3 @@
-//TODO: keep old searches in local storage
 let userInput = document.querySelector('input')
 const searchBtn = document.querySelector('button')
 const cityEl = document.querySelector('#city')
@@ -53,8 +52,8 @@ function searchWeather() {
                             searchCol.append(newSearchBtn)
                             //Removal of repeat entries, create an empty list to append true values for each new button.
                             const seenIDs = []
-                            for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {
-                                button = document.getElementsByClassName('newBtn')[each]
+                            for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {                         
+                                button = document.getElementsByClassName('newBtn')[each]                                
                                 localStorage.setItem('new-button ' + each, button.textContent)
                                 localStorage.setItem('button-value ' + each, button.value)
                                 //Checks to see if the textContent and latitude exists per button, and removes the old search.
@@ -138,10 +137,11 @@ window.onload = function () {
         newBtn.textContent = localStorage.getItem('new-button ' + each)
         newBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
         newBtn.setAttribute("id", "new-search")
-        newBtn.addEventListener("click", function() {
-            userInput.value = localStorage.getItem('button-value ' + each)
+        newBtn.value = localStorage.getItem('button-value ' + each)
+        newBtn.addEventListener("click", function () {
+            userInput.value = newBtn.value
+            searchWeather()
         })
-        newBtn.addEventListener("click", searchWeather)
         searchCol.append(newBtn)
     }
 }
