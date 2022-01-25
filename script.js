@@ -146,6 +146,10 @@ window.onload = function () {
         searchCol.append(newBtn)
     }
 }
+//Adds margin to top of each small weather card for better viewing.
+for (let each = 0; each < document.getElementById('cards').children.length; each++) {
+    document.getElementById('cards').children[each].style.marginTop = '15px'
+}
 //Applies style changes on window size change.
 function mediaQuery(query) {
     if (query.matches) {
