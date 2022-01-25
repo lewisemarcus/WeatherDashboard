@@ -55,7 +55,7 @@ function searchWeather() {
                                 button = document.getElementsByClassName('newBtn')[each]
                                 localStorage.setItem('new-button ' + each, button.textContent)
                                 localStorage.setItem('button-value ' + each, button.value)
-                                //Checks to see if the textContent and latitude exists per button, and removes the old search.
+                                //Checks to see if the textContent and latitude exists per button, removes new search if old search exists.
                                 //For identical city names in different states.
                                 if (seenIDs[button.value] == true && seenLats[lat.toString()] == true) {
                                     button.remove()
