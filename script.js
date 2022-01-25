@@ -1,3 +1,4 @@
+//Declarations.
 let userInput = document.querySelector('input')
 const searchBtn = document.querySelector('button')
 const cityEl = document.querySelector('#city')
@@ -8,12 +9,9 @@ const uviEl = document.createElement('span')
 const seenLats = []
 const error = document.createElement('p')
 error.classList.add("error")
-
 const api = 'd02fa9172dbf15e41731eb3c85cf0882'
-
+//Hides weather section until successful city search.
 document.querySelector('#weather').style.visibility = 'hidden'
-
-
 function searchWeather() {
     //Removes error message if already present on page.
     if (searchCol.children[0].matches('.error')) {
@@ -40,6 +38,7 @@ function searchWeather() {
                     document.querySelector('#weather').style.visibility = 'visible'
                     return response.json()
                         .then(function (data) {
+                            //Grab latitude and longitude from city input.
                             const lat = data.coord.lat
                             const lon = data.coord.lon
                             const oneCallUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + lon + '&units=imperial&appid=' + api
@@ -52,15 +51,15 @@ function searchWeather() {
                             searchCol.append(newSearchBtn)
                             //Removal of repeat entries, create an empty list to append true values for each new button.
                             const seenIDs = []
-                            for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {                         
-                                button = document.getElementsByClassName('newBtn')[each]                                
+                            for (let each = 0; each < document.getElementsByClassName('newBtn').length; each++) {
+                                button = document.getElementsByClassName('newBtn')[each]
                                 localStorage.setItem('new-button ' + each, button.textContent)
                                 localStorage.setItem('button-value ' + each, button.value)
                                 //Checks to see if the textContent and latitude exists per button, and removes the old search.
-                                if (seenIDs[button.value] == true && seenLats[lat.toString()] == true) { 
+                                if (seenIDs[button.value] == true && seenLats[lat.toString()] == true) {
                                     button.remove()
                                 }
-                                //If the textContent/latitude are originial, set value of corresponding index in SeenIDs/seenLats to 'true'
+                                //If the textContent/latitude are originial, set value of corresponding index in SeenIDs/seenLats to 'true'.
                                 else {
                                     searchCol.append(newSearchBtn)
                                     seenLats[lat.toString()] = true
@@ -81,7 +80,7 @@ function searchWeather() {
                                 })
                                 .then(function (data) {
                                     document.querySelector('#city-date').textContent = moment().tz(data.timezone).format('L')
-                                    //Checks if there are news headlines in 'data', displays if existing
+                                    //Checks if there are news headlines in 'data', displays if it exists.
                                     if (data.alerts != undefined) {
                                         document.querySelector('#card-headline').textContent = data.alerts[0].description.substring(3, 150) + '...'
                                     }
@@ -89,6 +88,7 @@ function searchWeather() {
                                         document.querySelector('#card-headline').textContent = ""
                                     }
                                     uviEl.innerHTML = data.current.uvi
+                                    //Sets UV Index color
                                     if (data.current.uvi < 3) {
                                         uviEl.setAttribute('style', 'background-color: lime')
                                     }
@@ -130,7 +130,7 @@ function searchWeather() {
 }
 userInput.setAttribute("autocomplete", "on")
 searchBtn.addEventListener("click", searchWeather)
-
+//On page load, reload each successful previous search from localStorage.
 window.onload = function () {
     for (let each = 0; each < localStorage.getItem('buttons'); each++) {
         const newBtn = document.createElement('button')
@@ -145,28 +145,28 @@ window.onload = function () {
         searchCol.append(newBtn)
     }
 }
-
+//Applies style changes on window size change.
 function mediaQuery(query) {
     if (query.matches) {
-    document.getElementById('weather').style.marginTop = '15px'
-    document.getElementById('main-div').classList.replace("row","flex-column")
-    document.getElementById('main-div').classList.add("d-flex")
-    document.getElementById('main-div').style.alignItems = 'center'
-    document.getElementById('weather').style.maxWidth = '90%'
-    document.getElementById('container').classList.replace("justify-content-start","justify-content-center")
-    document.getElementById('cards').classList.replace("justify-content-between","justify-content-center")
-    console.log('match')
+        document.getElementById('weather').style.marginTop = '15px'
+        document.getElementById('main-div').classList.replace("row", "flex-column")
+        document.getElementById('main-div').classList.add("d-flex")
+        document.getElementById('main-div').style.alignItems = 'center'
+        document.getElementById('weather').style.maxWidth = '90%'
+        document.getElementById('container').classList.replace("justify-content-start", "justify-content-center")
+        document.getElementById('cards').classList.replace("justify-content-between", "justify-content-center")
+        console.log('match')
     }
     else {
         document.getElementById('weather').style.marginTop = '0'
         document.getElementById('weather').style.maxWidth = '72%'
         document.getElementById('cards').classList.replace("justify-content-center", "justify-content-between")
         document.getElementById('main-div').style.alignItems = ''
-        document.getElementById('main-div').classList.replace("flex-column","row")
+        document.getElementById('main-div').classList.replace("flex-column", "row")
         document.getElementById('container').classList.replace("justify-content-center", "justify-content-start")
     }
 }
-
 const windowSize = window.matchMedia("(max-width: 576px)")
 mediaQuery(windowSize)
+//Necessary to use deprecated listener function as it only takes one paramater.
 windowSize.addListener(mediaQuery)
