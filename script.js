@@ -32,14 +32,14 @@ function searchWeather() {
         document.querySelector('#weather').style.visibility = 'hidden'
     }
     else {
-        const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput.value + ',us&units=imperial&appid=' + api
+        const requestUrl = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput.value + '&units=imperial&appid=' + api
         //First fetch request to get lat and lon, One Call API takes lat lon only(no city entry).
         fetch(requestUrl)
             .then(function (response) {
                 //Checks if response is valid.
                 if (response.status == "404") {
                     console.log("INVALID ENTRY")
-                    error.textContent = "INVALID ENTRY! Please enter a city in the US..."
+                    error.textContent = "INVALID ENTRY! Please enter a city..."
                     searchCol.prepend(error)
                     document.querySelector('#weather').style.visibility = 'hidden'
                 }
