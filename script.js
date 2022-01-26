@@ -8,13 +8,16 @@ const searchCol = document.getElementById('searchCol')
 const uviEl = document.createElement('span')
 const seenLats = []
 const error = document.createElement('p')
+error.classList.add("error")
 const clearBtn = document.createElement('button')
 clearBtn.style.borderRadius = '5px'
+clearBtn.style.marginLeft = '30px'
+clearBtn.style.backgroundColor = "#06aed5"
+clearBtn.style.color = 'white'
 clearBtn.textContent = 'Clear Searches'
 clearBtn.style.marginBottom = '10px'
-clearBtn.style.marginLeft = '30px'
-searchCol.prepend(clearBtn)
-error.classList.add("error")
+clearBtn.classList.add('btn', 'btn-outline-secondary')
+userInput.style.borderRadius = '5px'
 const api = 'd02fa9172dbf15e41731eb3c85cf0882'
 //Hides weather section until successful city search.
 document.querySelector('#weather').style.visibility = 'hidden'
@@ -187,3 +190,4 @@ function clearSearches() {
   }
 }
 clearBtn.addEventListener("click", clearSearches)
+searchCol.prepend(clearBtn)
