@@ -5,13 +5,13 @@ const cityEl = document.querySelector('#city')
 const largeCard = document.querySelector('#large-weather')
 const cards = document.querySelector('#cards')
 const searchCol = document.getElementById('searchCol')
+searchCol.classList.add('d-flex', 'flex-column')
 const uviEl = document.createElement('span')
 const seenLats = []
 const error = document.createElement('p')
 error.classList.add("error")
 const clearBtn = document.createElement('button')
 clearBtn.style.borderRadius = '5px'
-clearBtn.style.marginLeft = '30px'
 clearBtn.style.backgroundColor = "#06aed5"
 clearBtn.style.color = 'white'
 clearBtn.textContent = 'Clear Searches'
