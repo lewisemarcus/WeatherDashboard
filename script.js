@@ -186,7 +186,10 @@ windowSize.addListener(mediaQuery)
 //Clears all recent searches.
 function clearSearches() {
   if (document.getElementsByClassName('newBtn').length > 0) {
-    document.getElementsByClassName('newBtn').forEach(element => element.remove())
+   for (let each of document.getElementsByClassName('newBtn')) {
+     each.remove()
+   }
+   //alt(doesn't work in some browsers): document.getElementsByClassName('newBtn').forEach(element => element.remove())
     clearSearches()
   }
 }
