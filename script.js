@@ -184,9 +184,11 @@ mediaQuery(windowSize)
 //Necessary to use deprecated listener function as it only takes one paramater.
 windowSize.addListener(mediaQuery)
 //Clears all recent searches.
-//TODO: not all recent searches removed, second one remains.
 function clearSearches() {
-  document.getElementsByClassName('newBtn').forEach(element => element.remove())
+  if (document.getElementsByClassName('newBtn').length > 0) {
+    document.getElementsByClassName('newBtn').forEach(element => element.remove())
+    clearSearches()
+  }
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
