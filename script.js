@@ -39,7 +39,7 @@ function searchWeather() {
                 //Checks if response is valid.
                 if (response.status == "404") {
                     console.log("INVALID ENTRY")
-                    error.textContent = "INVALID ENTRY! Please enter a city..."
+                    error.textContent = "INVALID ENTRY! Please enter a city in the US..."
                     searchCol.prepend(error)
                     document.querySelector('#weather').style.visibility = 'hidden'
                 }
