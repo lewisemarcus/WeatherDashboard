@@ -216,10 +216,8 @@ clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
 
 const cityList = ['Tokyo?', 'Mumbai?', 'London?', 'Los Angeles?', 'New York?', 'Seattle?', 'Copenhagen?', 'Berlin?', 'Morocco?', 'Paris?', 'Portland?', 'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?']
-console.log(Math.floor(Math.random() * cityList.length))
 document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
 
 setInterval(function () {
     document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
-    console.log(document.getElementById('changeCity').textContent)
 }, 1000 * 20)
