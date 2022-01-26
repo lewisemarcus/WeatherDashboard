@@ -80,9 +80,9 @@ function searchWeather() {
                             //Recursive call of searchWeather if old searches are clicked.
                             newSearchBtn.addEventListener("click", function () {
                                 userInput.value = newSearchBtn.value
-                  
-                            document.getElementById('collapseOne').classList.remove('show')         
-                           searchWeather()
+
+                                document.getElementById('collapseOne').classList.remove('show')
+                                searchWeather()
                             })
                             userInput.value = ""
                             //Fetch request to get UV Index and humidity from One Call API.
@@ -157,7 +157,7 @@ window.onload = function () {
             newBtn.value = localStorage.getItem('button-value ' + each)
             newBtn.addEventListener("click", function () {
                 userInput.value = newBtn.value
-                document.getElementById('collapseOne').classList.remove('show') 
+                document.getElementById('collapseOne').classList.remove('show')
                 searchWeather()
             })
             searchCol.append(newBtn)
@@ -214,3 +214,12 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
+
+const cityList = ['Tokyo?', 'Mumbai?', 'London?', 'Los Angeles?', 'New York?']
+console.log(Math.floor(Math.random() * cityList.length))
+document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
+
+setInterval(function () {
+    document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
+    console.log(document.getElementById('changeCity').textContent)
+}, 1000 * 20)
