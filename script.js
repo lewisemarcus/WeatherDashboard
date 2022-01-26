@@ -142,6 +142,7 @@ userInput.setAttribute("autocomplete", "on")
 searchBtn.addEventListener("click", searchWeather)
 //On page load, reload each successful previous search from localStorage.
 window.onload = function () {
+  if (localStorage.getItem('buttons') != "") {
     for (let each = 0; each < localStorage.getItem('buttons'); each++) {
         const newBtn = document.createElement('button')
         newBtn.textContent = localStorage.getItem('new-button ' + each)
@@ -154,6 +155,7 @@ window.onload = function () {
         })
         searchCol.append(newBtn)
     }
+  }
 }
 //Adds margin to top of each small weather card for better viewing.
 for (let each = 0; each < document.getElementById('cards').children.length; each++) {
@@ -186,11 +188,13 @@ windowSize.addListener(mediaQuery)
 //Clears all recent searches.
 function clearSearches() {
   if (document.getElementsByClassName('newBtn').length > 0) {
+    localStorage.setItem('buttons', "")
    for (let each of document.getElementsByClassName('newBtn')) {
      each.remove()
+     clearSearches()
    }
    //alt(doesn't work in some browsers): document.getElementsByClassName('newBtn').forEach(element => element.remove())
-    clearSearches()
+   //clearSearches()
   }
 }
 clearBtn.addEventListener("click", clearSearches)
