@@ -19,3 +19,8 @@ img {
     color: white;
     margin-top: 10px;
 }
+
+.title {
+    font-size: xx-large;
+    font-weight: bolder;
+}
