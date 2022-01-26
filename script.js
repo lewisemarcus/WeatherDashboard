@@ -80,7 +80,9 @@ function searchWeather() {
                             //Recursive call of searchWeather if old searches are clicked.
                             newSearchBtn.addEventListener("click", function () {
                                 userInput.value = newSearchBtn.value
-                                searchWeather()
+                  
+                            document.getElementById('collapseOne').classList.remove('show')         
+                           searchWeather()
                             })
                             userInput.value = ""
                             //Fetch request to get UV Index and humidity from One Call API.
@@ -156,6 +158,7 @@ window.onload = function () {
             newBtn.value = localStorage.getItem('button-value ' + each)
             newBtn.addEventListener("click", function () {
                 userInput.value = newBtn.value
+                document.getElementById('collapseOne').classList.remove('show') 
                 searchWeather()
             })
             searchCol.append(newBtn)
@@ -212,4 +215,3 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
-let val = false
