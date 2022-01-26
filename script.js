@@ -89,13 +89,18 @@ function searchWeather() {
                                     return response.json()
                                 })
                                 .then(function (data) {
+                                    console.log(data)
                                     document.querySelector('#city-date').textContent = moment().tz(data.timezone).format('L')
                                     //Checks if there are news headlines in 'data', displays if it exists.
                                     if (data.alerts != undefined) {
-                                        document.querySelector('#card-headline').textContent = data.alerts[0].description.substring(3, 150) + '...'
+                                        document.getElementById('headlineDiv').style.visibility = 'visible'
+                                        document.getElementById('headline-button').textContent = data.alerts[0].event
+                                        document.getElementById('headline-text').textContent = data.alerts[0].description
                                     }
                                     else {
-                                        document.querySelector('#card-headline').textContent = ""
+                                        document.getElementById('headlineDiv').style.visibility = 'hidden'
+                                        document.getElementById('headline-button').textContent = ""
+                                        document.getElementById('headline-text').textContent = ""
                                     }
                                     uviEl.innerHTML = data.current.uvi
                                     //Sets UV Index color
@@ -142,20 +147,20 @@ userInput.setAttribute("autocomplete", "on")
 searchBtn.addEventListener("click", searchWeather)
 //On page load, reload each successful previous search from localStorage.
 window.onload = function () {
-  if (localStorage.getItem('buttons') != "") {
-    for (let each = 0; each < localStorage.getItem('buttons'); each++) {
-        const newBtn = document.createElement('button')
-        newBtn.textContent = localStorage.getItem('new-button ' + each)
-        newBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
-        newBtn.setAttribute("id", "new-search")
-        newBtn.value = localStorage.getItem('button-value ' + each)
-        newBtn.addEventListener("click", function () {
-            userInput.value = newBtn.value
-            searchWeather()
-        })
-        searchCol.append(newBtn)
+    if (localStorage.getItem('buttons') != "") {
+        for (let each = 0; each < localStorage.getItem('buttons'); each++) {
+            const newBtn = document.createElement('button')
+            newBtn.textContent = localStorage.getItem('new-button ' + each)
+            newBtn.classList.add("btn", "newBtn", "btn-outline-secondary")
+            newBtn.setAttribute("id", "new-search")
+            newBtn.value = localStorage.getItem('button-value ' + each)
+            newBtn.addEventListener("click", function () {
+                userInput.value = newBtn.value
+                searchWeather()
+            })
+            searchCol.append(newBtn)
+        }
     }
-  }
 }
 //Adds margin to top of each small weather card for better viewing.
 for (let each = 0; each < document.getElementById('cards').children.length; each++) {
@@ -164,6 +169,10 @@ for (let each = 0; each < document.getElementById('cards').children.length; each
 //Applies style changes on window size change.
 function mediaQuery(query) {
     if (query.matches) {
+        for (let each of Array.from(document.getElementById('cards').children)) {
+            each.style.marginBottom = '0'
+            each.style.width = '90%'
+        }
         document.getElementById('weather').style.marginTop = '15px'
         document.getElementById('main-div').classList.replace("row", "flex-column")
         document.getElementById('main-div').classList.add("d-flex")
@@ -173,6 +182,10 @@ function mediaQuery(query) {
         document.getElementById('cards').classList.replace("justify-content-between", "justify-content-center")
     }
     else {
+        for (let each of Array.from(document.getElementById('cards').children)) {
+            each.style.marginBottom = '40px'
+            each.style.width = 'auto'
+        }
         document.getElementById('weather').style.marginTop = '0'
         document.getElementById('weather').style.maxWidth = '72%'
         document.getElementById('cards').classList.replace("justify-content-center", "justify-content-between")
@@ -187,15 +200,16 @@ mediaQuery(windowSize)
 windowSize.addListener(mediaQuery)
 //Clears all recent searches.
 function clearSearches() {
-  if (document.getElementsByClassName('newBtn').length > 0) {
-    localStorage.setItem('buttons', "")
-   for (let each of document.getElementsByClassName('newBtn')) {
-     each.remove()
-     clearSearches()
-   }
-   //alt(doesn't work in some browsers): document.getElementsByClassName('newBtn').forEach(element => element.remove())
-   //clearSearches()
-  }
+    if (document.getElementsByClassName('newBtn').length > 0) {
+        localStorage.setItem('buttons', "")
+        for (let each of document.getElementsByClassName('newBtn')) {
+            each.remove()
+            clearSearches()
+        }
+        //alt(doesn't work in some browsers): document.getElementsByClassName('newBtn').forEach(element => element.remove())
+        //clearSearches()
+    }
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
+let val = false
