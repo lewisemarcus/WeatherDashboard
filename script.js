@@ -91,7 +91,6 @@ function searchWeather() {
                                     return response.json()
                                 })
                                 .then(function (data) {
-                                    console.log(data)
                                     document.querySelector('#city-date').textContent = moment().tz(data.timezone).format('L')
                                     //Checks if there are news headlines in 'data', displays if it exists.
                                     if (data.alerts != undefined) {
