@@ -8,6 +8,12 @@ const searchCol = document.getElementById('searchCol')
 const uviEl = document.createElement('span')
 const seenLats = []
 const error = document.createElement('p')
+const clearBtn = document.createElement('button')
+clearBtn.style.borderRadius = '5px'
+clearBtn.textContent = 'Clear Searches'
+clearBtn.style.marginBottom = '10px'
+clearBtn.style.marginLeft = '30px'
+searchCol.prepend(clearBtn)
 error.classList.add("error")
 const api = 'd02fa9172dbf15e41731eb3c85cf0882'
 //Hides weather section until successful city search.
@@ -174,3 +180,10 @@ const windowSize = window.matchMedia("(max-width: 576px)")
 mediaQuery(windowSize)
 //Necessary to use deprecated listener function as it only takes one paramater.
 windowSize.addListener(mediaQuery)
+//Clears all recent searches.
+function clearSearches() {
+  for (let each of document.getElementsByClassName('newBtn')) {
+    each.remove()
+  }
+}
+clearBtn.addEventListener("click", clearSearches)
