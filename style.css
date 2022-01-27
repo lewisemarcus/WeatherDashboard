@@ -30,14 +30,14 @@ img {
 .message, .message:hover {
     text-align: center;
     background-color: #06aed5;
-    cursor: default;
+    cursor: pointer;
     white-space: nowrap;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
-    outline: solid 1px #4b4b4b;
     display: block;
+    font-size: xx-large;
     font-weight: 900;
     overflow: hidden;
     position: relative;

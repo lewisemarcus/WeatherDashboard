@@ -95,7 +95,7 @@ function searchWeather() {
                                     //Checks if there are news headlines in 'data', displays if it exists.
                                     if (data.alerts != undefined) {
                                         document.getElementById('headlineDiv').style.visibility = 'visible'
-                                        document.getElementById('headline-button').textContent = data.alerts[0].event  + '(click to expand)'
+                                        document.getElementById('headline-button').textContent = data.alerts[0].event  + ' (click to expand)'
                                         document.getElementById('headline-text').textContent = data.alerts[0].description
                                     }
                                     else {
@@ -214,7 +214,7 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
-
+//Allows for dynamic button to be clickable.
 document.getElementById('changeCity').addEventListener("click", function() {
   let newInput = document.getElementById('changeCity').textContent
   newInput = newInput.replace('?','')
