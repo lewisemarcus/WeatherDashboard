@@ -37,7 +37,6 @@ img {
     overflow: hidden;
     position: relative;
     top: 0.2rem;
-    left: 200px;
     animation: openclose 9s ease-in-out infinite;
   }
   
