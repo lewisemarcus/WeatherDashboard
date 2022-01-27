@@ -31,6 +31,7 @@ img {
     text-align: center;
     background-color: #06aed5;
     cursor: default;
+    white-space: nowrap;
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
@@ -57,11 +58,11 @@ img {
       width: 0;
     }
     15% {
-      width: 230px;
+      width: 250px;
     }
     30% {
       top: 0.2rem;
-      width: 230px;
+      width: 250px;
     }
     33% {
       top: 0.2rem;
@@ -76,11 +77,11 @@ img {
     }
     48% {
       top: 0.2rem;
-      width: 230px;
+      width: 250px;
     }
     62% {
       top: 0.2rem;
-      width: 230px;
+      width: 250px;
     }
     66% {
       top: 0.2rem;
@@ -94,11 +95,11 @@ img {
     }
     86% {
       top: 0.2rem;
-      width: 230px;
+      width: 250px;
     }
     95% {
       top: 0.2rem;
-      width: 230px;
+      width: 250px;
     }
     98% {
       top: 0.2rem;
