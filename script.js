@@ -95,7 +95,7 @@ function searchWeather() {
                                     //Checks if there are news headlines in 'data', displays if it exists.
                                     if (data.alerts != undefined) {
                                         document.getElementById('headlineDiv').style.visibility = 'visible'
-                                        document.getElementById('headline-button').textContent = data.alerts[0].event
+                                        document.getElementById('headline-button').textContent = data.alerts[0].event  + '(click to expand)'
                                         document.getElementById('headline-text').textContent = data.alerts[0].description
                                     }
                                     else {
