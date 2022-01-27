@@ -220,4 +220,4 @@ document.getElementById('changeCity').textContent = cityList[Math.floor(Math.ran
 setInterval(function () {
     document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
     
-}, 1000*3)
+}, 1000*5)

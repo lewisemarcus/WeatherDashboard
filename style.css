@@ -28,6 +28,7 @@ img {
 }
 
 .message, .message:hover {
+    text-align: center;
     background-color: #06aed5;
     cursor: default;
     padding-bottom: 5px;
@@ -39,7 +40,7 @@ img {
     overflow: hidden;
     position: relative;
     top: 0.2rem;
-    animation: openclose 9s ease-in-out infinite;
+    animation: openclose 15s ease-in-out infinite;
   }
   
   .word1, .word2, .word3 {
@@ -70,8 +71,7 @@ img {
       width: 0;
     }
     38% {
-      top: 0.2rem;
-      
+      top: 0.2rem;     
     }
     48% {
       top: 0.2rem;
