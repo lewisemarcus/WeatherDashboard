@@ -1,6 +1,6 @@
 //Declarations.
 let userInput = document.querySelector('input')
-const searchBtn = document.querySelector('button')
+const searchBtn = document.querySelector('#search-button')
 const cityEl = document.querySelector('#city')
 const largeCard = document.querySelector('#large-weather')
 const cards = document.querySelector('#cards')
@@ -22,6 +22,7 @@ const api = 'd02fa9172dbf15e41731eb3c85cf0882'
 //Hides weather section until successful city search.
 document.querySelector('#weather').style.visibility = 'hidden'
 function searchWeather() {
+  console.log(userInput.value)
     //Removes error message if already present on page.
     if (searchCol.children[0].matches('.error')) {
         searchCol.children[0].remove()
@@ -213,6 +214,7 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
+
 document.getElementById('changeCity').addEventListener("click", function() {
   let newInput = document.getElementById('changeCity').textContent
   newInput = newInput.replace('?','')
@@ -220,7 +222,7 @@ document.getElementById('changeCity').addEventListener("click", function() {
   searchWeather()
 })
 //Cycle through list of cities
-const cityList = ['Sydney?', 'Amsterdam?', 'Casablanca?', 'Kinshasa?', 'Cape Town?', 'Cairo?', 'Angkor?', 'Hanoi?', 'Stockholm?', 
+const cityList = ['Sydney?', 'Amsterdam?', 'Casablanca?', 'Kinshasa?', 'Cape Town?', 'Cairo?', 'Hanoi?', 'Stockholm?', 
 'Dubai?', 'Tokyo?', 'Mumbai?', 'London?', 'Los Angeles?', 'New York?', 'Seattle?', 'Copenhagen?', 'Berlin?', 'Morocco?', 'Paris?', 'Portland?', 
 'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?', 'Istanbul?']
 document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
