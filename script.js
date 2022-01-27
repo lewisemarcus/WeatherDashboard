@@ -214,10 +214,10 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
-
+//Cycle through list of cities
 const cityList = ['Tokyo?', 'Mumbai?', 'London?', 'Los Angeles?', 'New York?', 'Seattle?', 'Copenhagen?', 'Berlin?', 'Morocco?', 'Paris?', 'Portland?', 'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?']
 document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
-
 setInterval(function () {
     document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
-}, 1000 * 20)
+    
+}, 1000*3)

@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:900&display=swap");
+
 .searchBtn {
     width: 100%;
     background-color: #06aed5;
@@ -24,3 +26,86 @@ img {
     font-size: xx-large;
     font-weight: bolder;
 }
+
+.message {
+    background-color: #06aed5;
+    border-radius: 5px;
+    color: #333;
+    padding-left: 5px;
+    display: block;
+    font-weight: 900;
+    overflow: hidden;
+    position: relative;
+    top: 0.2rem;
+    left: 200px;
+    animation: openclose 9s ease-in-out infinite;
+  }
+  
+  .word1, .word2, .word3 {
+    font-family: tahoma;
+  }
+  
+  @keyframes openclose {
+    0% {
+      top: 0.2rem;
+      width: 0;
+    }
+    5% {
+      width: 0;
+    }
+    15% {
+      width: 230px;
+    }
+    30% {
+      top: 0.2rem;
+      width: 230px;
+    }
+    33% {
+      top: 0.2rem;
+      width: 0;
+    }
+    35% {
+      top: 0.2rem;
+      width: 0;
+    }
+    38% {
+      top: 0.2rem;
+      
+    }
+    48% {
+      top: 0.2rem;
+      width: 230px;
+    }
+    62% {
+      top: 0.2rem;
+      width: 230px;
+    }
+    66% {
+      top: 0.2rem;
+      width: 0;
+      text-indent: 0;
+    }
+    71% {
+      top: 0.2rem;
+      width: 0;
+      text-indent: 5px;
+    }
+    86% {
+      top: 0.2rem;
+      width: 230px;
+    }
+    95% {
+      top: 0.2rem;
+      width: 230px;
+    }
+    98% {
+      top: 0.2rem;
+      width: 0;
+      text-indent: 5px;
+    }
+    100% {
+      top: 0.2rem;
+      width: 0;
+      text-indent: 0;
+    }
+  }
