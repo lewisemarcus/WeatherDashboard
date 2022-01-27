@@ -20,6 +20,8 @@ IF a user enters an invalid location,
 THEN they will be presented with an error message.
 IF a user does not enter a location, but attempts a search,
 THEN an error message will display telling the user to enter a location.
+IF a user clicks the 'Clear Searches' button,
+THEN all saved searches will be removed from localStorage.
 ```
 - - -
 
