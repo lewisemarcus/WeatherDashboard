@@ -213,10 +213,16 @@ function clearSearches() {
 }
 clearBtn.addEventListener("click", clearSearches)
 searchCol.prepend(clearBtn)
+document.getElementById('changeCity').addEventListener("click", function() {
+  let newInput = document.getElementById('changeCity').textContent
+  newInput = newInput.replace('?','')
+  userInput.value = newInput
+  searchWeather()
+})
 //Cycle through list of cities
 const cityList = ['Sydney?', 'Amsterdam?', 'Casablanca?', 'Kinshasa?', 'Cape Town?', 'Cairo?', 'Angkor?', 'Hanoi?', 'Stockholm?', 
 'Dubai?', 'Tokyo?', 'Mumbai?', 'London?', 'Los Angeles?', 'New York?', 'Seattle?', 'Copenhagen?', 'Berlin?', 'Morocco?', 'Paris?', 'Portland?', 
-'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?']
+'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?', 'Istanbul?']
 document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
 setInterval(function () {
     document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]    
