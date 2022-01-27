@@ -31,6 +31,7 @@ img {
     text-align: center;
     background-color: #06aed5;
     cursor: default;
+    padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 5px;
     color: rgb(255, 255, 255);
