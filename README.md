@@ -30,3 +30,4 @@ THEN a user is again presented with current and future conditions for that city
 # Contributors
 
 [Marcus Lewis](https://github.com/lewisemarcus)
+[Luke Embrey](https://github.com/embluk) — Text animation.
