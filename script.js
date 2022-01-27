@@ -219,6 +219,5 @@ const cityList = ['Sydney?', 'Amsterdam?', 'Casablanca?', 'Kinshasa?', 'Cape Tow
 'Beijing?', 'Seoul?', 'Taipei?', 'Busan?', 'Shanghai?', 'Lagos?', 'Montego Bay?']
 document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
 setInterval(function () {
-    document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]
-    
+    document.getElementById('changeCity').textContent = cityList[Math.floor(Math.random() * cityList.length)]    
 }, 1000*5)
