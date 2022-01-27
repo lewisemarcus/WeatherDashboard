@@ -80,7 +80,6 @@ function searchWeather() {
                             //Recursive call of searchWeather if old searches are clicked.
                             newSearchBtn.addEventListener("click", function () {
                                 userInput.value = newSearchBtn.value
-
                                 document.getElementById('collapseOne').classList.remove('show')
                                 searchWeather()
                             })
