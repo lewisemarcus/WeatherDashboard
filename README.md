@@ -42,4 +42,5 @@ The line below the text 'What will the weather be like in: ' will update with ra
 # Contributors
 
 [Marcus Lewis](https://github.com/lewisemarcus)
+
 [Luke Embrey](https://github.com/embluk) — Text animation.
